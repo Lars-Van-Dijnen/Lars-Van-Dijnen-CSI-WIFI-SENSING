@@ -1,0 +1,21 @@
+Validation performed 2026-10-29 UTC.
+ESP-IDF: official v6.1 tag, commit fff9895c82d744c7237be8847347bdd1b07c6643.
+Target: ESP32-S3. Toolchain: xtensa-esp-elf GCC 15.2.0_20251204.
+Board A: idf.py build succeeded, including linking and image/partition size checks.
+Board B: idf.py build succeeded, including linking and image/partition size checks.
+Both generated sdkconfigs checked: distinct A/B identities, CSI enabled, channel 6, 100 ms cycle.
+Host protocol tests: passed with GCC -Wall -Wextra -Werror -pedantic.
+AddressSanitizer and UndefinedBehaviorSanitizer: protocol tests passed.
+Leak detection disabled because this execution environment does not support it under tracing.
+Checks cover malformed/truncated ESP-NOW frame bodies and 8,224 random-input trials.
+Source copies in both projects match the separately supplied C file.
+Hardware: not flashed or tested on physical ESP32-S3 boards here.
+Radio reception, sample rate, and console output still require testing on your boards.
+
+Build environment note: IDF_COMPONENT_MANAGER=0 was used because process introspection
+is unavailable in this environment. This project has no managed/external components.
+Normal user builds do not need that environment setting.
+
+Source SHA-256: 08030fa5912d6a88b0ff5cbf6ee497fd669ba5048b27dcf0f1fbf3d895972d94
+Board A build binary SHA-256 (not bundled): 01ab7869727d18d087d0d1b4dcb75979df4683eee4431153ccc0c2779bf4f901
+Board B build binary SHA-256 (not bundled): 496693501d9b23d6170de569ece9022aaeabbf02680c957b3ee12dc66869b5ad

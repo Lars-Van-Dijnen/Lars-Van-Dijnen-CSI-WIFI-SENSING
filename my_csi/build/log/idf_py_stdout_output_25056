@@ -1,0 +1,54 @@
+Command: ninja flash
+[1/5] C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\larsv\Downloads\my_csi\build && C:\Espressif\tools\python\v6.1\venv\Scripts\python.exe C:/esp/v6.1/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 partition --type app C:/Users/larsv/Downloads/my_csi/build/partition_table/partition-table.bin C:/Users/larsv/Downloads/my_csi/build/my_csi.bin"
+my_csi.bin binary size 0xbcff0 bytes. Smallest app partition is 0x100000 bytes. 0x43010 bytes (26%) free.
+[2/5] Performing build step for 'bootloader'
+[1/1] C:\WINDOWS\system32\cmd.exe /C "cd /D C:\Users\larsv\Downloads\my_csi\build\bootloader && C:\Espressif\tools\python\v6.1\venv\Scripts\python.exe C:/esp/v6.1/esp-idf/components/partition_table/check_sizes.py --offset 0x8000 bootloader 0x0 C:/Users/larsv/Downloads/my_csi/build/bootloader/bootloader.bin"
+Bootloader binary size 0x5280 bytes. 0x2d80 bytes (36%) free.
+[3/5] No install step for 'bootloader'
+[4/5] Completed 'bootloader'
+[4/5] Running utility command for flash
+esptool --chip esp32s3 -p COM3 -b 460800 --before=default-reset --after=hard-reset write-flash --flash-mode dio --flash-freq 80m --flash-size 2MB 0x0 bootloader/bootloader.bin 0x8000 partition_table/partition-table.bin 0x10000 my_csi.bin --diff-with bootloader/bootloader_flashed.bin partition_table/partition-table_flashed.bin my_csi_flashed.bin
+esptool v5.6.0
+Serial port COM3:
+Connecting...
+Connected to ESP32-S3 on COM3:
+Chip type:          ESP32-S3 (QFN56) (revision v0.2)
+Features:           Wi-Fi, BT 5 (LE), Dual Core + LP Core, 240MHz, Embedded PSRAM 8MB (AP_3v3)
+Crystal frequency:  40MHz
+USB mode:           USB-Serial/JTAG
+MAC:                1c:db:d4:47:0e:8c
+
+Uploading stub flasher...
+Running stub flasher...
+Stub flasher running.
+Changing baud rate to 460800...
+Changed.
+
+Configuring flash size...
+
+Writing 'bootloader/bootloader.bin' at 0x00000000...
+SHA digest in image updated.
+SHA digest in image updated.
+No changed sectors found, verifying if data is in flash...
+'bootloader/bootloader.bin' at 0x00000000 verified.
+
+Writing 'partition_table/partition-table.bin' at 0x00008000...
+No changed sectors found, verifying if data is in flash...
+'partition_table/partition-table.bin' at 0x00008000 verified.
+
+Writing 'my_csi.bin' at 0x00010000...
+Changed data sectors found, fast reflashing...
+Reflashing 1 changed sector at 0x00010000...
+Flash will be erased from 0x00010000 to 0x00010fff...
+Compressed 4096 bytes to 1927...
+Writing at 0x00011000 ------------------------------ 100.0% 1.88kB/1.88kB [0s] 
+Wrote 4096 bytes (1927 compressed) at 0x00010000 in 0.0 seconds (2056.1 kbit/s).
+Reflashing 184 changed sectors at 0x00015000...
+Flash will be erased from 0x00015000 to 0x000ccfff...
+Compressed 753664 bytes to 500065...
+Writing at 0x000202b4  -----------------------------   3.3% 16.00kB/488.34kB [0s] Writing at 0x00026cbd - ----------------------------   6.6% 32.00kB/488.34kB [0s] Writing at 0x00031932 -- ---------------------------   9.8% 48.00kB/488.34kB [0s] Writing at 0x00037b42 --- --------------------------  13.1% 64.00kB/488.34kB [0s] Writing at 0x0003db64 ---- -------------------------  16.4% 80.00kB/488.34kB [1s] Writing at 0x00043d6a ----- ------------------------  19.7% 96.00kB/488.34kB [1s] Writing at 0x00049425 ------ -----------------------  22.9% 112.00kB/488.34kB [1s] Writing at 0x0004ea5c ------- ----------------------  26.2% 128.00kB/488.34kB [1s] Writing at 0x000540a0 -------- ---------------------  29.5% 144.00kB/488.34kB [1s] Writing at 0x0005961c --------- --------------------  32.8% 160.00kB/488.34kB [1s] Writing at 0x0005ea60 ---------- -------------------  36.0% 176.00kB/488.34kB [2s] Writing at 0x00063c75 ----------- ------------------  39.3% 192.00kB/488.34kB [2s] Writing at 0x00069196 ------------ -----------------  42.6% 208.00kB/488.34kB [2s] Writing at 0x0006e920 ------------- ----------------  45.9% 224.00kB/488.34kB [2s] Writing at 0x00073edb -------------- ---------------  49.1% 240.00kB/488.34kB [2s] Writing at 0x00079286 --------------- --------------  52.4% 256.00kB/488.34kB [2s] Writing at 0x0007e7ca ---------------- -------------  55.7% 272.00kB/488.34kB [2s] Writing at 0x000844f4 ----------------- ------------  59.0% 288.00kB/488.34kB [2s] Writing at 0x00089ebb ------------------ -----------  62.3% 304.00kB/488.34kB [2s] Writing at 0x0008f9fc ------------------- ----------  65.5% 320.00kB/488.34kB [3s] Writing at 0x00095620 -------------------- ---------  68.8% 336.00kB/488.34kB [3s] Writing at 0x0009af78 --------------------- --------  72.1% 352.00kB/488.34kB [3s] Writing at 0x000a0b8b ---------------------- -------  75.4% 368.00kB/488.34kB [3s] Writing at 0x000a6920 ----------------------- ------  78.6% 384.00kB/488.34kB [3s] Writing at 0x000ac0c4 ------------------------ -----  81.9% 400.00kB/488.34kB [3s] Writing at 0x000b1ef1 ------------------------- ----  85.2% 416.00kB/488.34kB [3s] Writing at 0x000b7fcb -------------------------- ---  88.5% 432.00kB/488.34kB [3s] Writing at 0x000be27c --------------------------- --  91.7% 448.00kB/488.34kB [3s] Writing at 0x000c496c ---------------------------- -  95.0% 464.00kB/488.34kB [3s] Writing at 0x000c9a10 -----------------------------   98.3% 480.00kB/488.34kB [3s] Writing at 0x000cd000 ------------------------------ 100.0% 488.34kB/488.34kB [4s] 
+Wrote 753664 bytes (500065 compressed) at 0x00015000 in 4.1 seconds (1485.3 kbit/s).
+Verifying written data...
+Hash of data verified.
+
+Hard resetting via RTS pin...

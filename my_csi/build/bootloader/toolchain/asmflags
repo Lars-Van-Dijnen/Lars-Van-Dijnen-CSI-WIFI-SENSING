@@ -1,0 +1,5 @@
+"-specs=C:/Users/larsv/Downloads/my_csi/build/bootloader/specs/picolibc.specs"
+-mlongcalls
+-fno-builtin-memcpy
+-fno-builtin-memset
+-fno-builtin-bzero

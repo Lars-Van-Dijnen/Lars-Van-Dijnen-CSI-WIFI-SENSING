@@ -1,0 +1,5 @@
+"-specs=C:/Users/larsv/Downloads/my_csi/esp32s3_csi_three_board/board_b/build/bootloader/specs/picolibc.specs"
+-mlongcalls
+-fno-builtin-memcpy
+-fno-builtin-memset
+-fno-builtin-bzero

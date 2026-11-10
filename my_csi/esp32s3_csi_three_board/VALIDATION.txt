@@ -1,0 +1,37 @@
+Validation performed 2026-10-30.
+Target: ESP32-S3 / ESP-IDF 6.1 (same driver APIs as the uploaded project).
+New defaults: channel 6, HT20 MCS0, 20 ms turns, 2 ms reply delay,
+1000 Hz FreeRTOS ticks, LLTF-only raw CSI, UART console at 460800 baud.
+Nominal full A+B+C round: 60 ms; actual rounds can be extended by radio delays.
+CSI queue increased from 24 to 64 records.
+
+Current host validation: PASSED, 9 Python unittest cases.
+Command: python3 -m unittest discover -s tests -p 'test_*.py' -v
+The suite compiles and runs the shared C protocol tests with:
+gcc -std=c11 -Wall -Wextra -Werror -pedantic tests/test_three_board.c
+
+Covered: packet/frame bounds, board identities, stale/duplicate grants,
+sequence wrap, nominal/extended 20 ms turn deadlines, six directed links,
+missing-peer and grant-loss simulations, CSV worst-case bounds, malformed
+input, and 8,224 random inputs. These are protocol simulations, not RF tests.
+
+Recorder integration uses rows emitted by the actual C format_csi function.
+Covered: all six directions, 128 raw signed I/Q values in original order,
+wide CSV roundtrip, labels/UTC timestamps/port identity, concurrent ports,
+split reads and serial timeouts, boot/status filtering, malformed/overlong
+row rejection and recovery, disconnect reporting with saved data, Ctrl+C
+queue draining, existing-file protection, and CLI opening/closing three
+mock serial devices at the matching baud rate.
+
+All four copies of the C source and all three board defaults were checked.
+Source SHA-256: cfc5d54540f88f8e47b9306fbc65a998c35e09df6f2444e4e7a002161d853ce3
+Python CLI help: PASSED (python3 capture_csv.py --help).
+
+Limitations for this revision:
+- ESP-IDF/toolchain is not installed here. A full ESP32-S3 firmware build
+  was not run for this edited version; build all three projects locally.
+- No physical boards or serial devices were available. RF reception, actual
+  sample rates, UART/USB throughput and real pyserial driver behavior remain
+  unverified. Tests inject simulated serial streams and include no real CSI.
+- Earlier firmware build results belonged to the uploaded 100 ms version;
+  they are not build results for this revision.

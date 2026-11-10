@@ -1,0 +1,39 @@
+menu "CSI three-board settings"
+
+    choice CSI_BOARD
+        prompt "Board identity"
+        default CSI_BOARD_A
+
+        config CSI_BOARD_A
+            bool "Board A (coordinator, transmitter and receiver)"
+
+        config CSI_BOARD_B
+            bool "Board B (transmitter and receiver)"
+
+        config CSI_BOARD_C
+            bool "Board C (transmitter and receiver)"
+    endchoice
+
+    config CSI_CHANNEL
+        int "Wi-Fi channel (match on all three boards)"
+        range 1 11
+        default 6
+
+    config CSI_TURN_MS
+        int "Duration of each transmitting turn in milliseconds"
+        range 20 5000
+        default 20
+        help
+            The default is 20 ms per turn and approximately 60 ms for A+B+C.
+            Each directed link is measured about 16.67 times per second; each
+            board receives about 33.33 CSI records per second from its two peers.
+            Use the same timing on all boards. The packaged UART console uses
+            460800 baud to carry the extra raw CSI rows. Radio delays can extend
+            turns; this is not a hard real-time synchronization protocol.
+
+    config CSI_REPLY_DELAY_MS
+        int "Delay after receiving a turn grant in milliseconds"
+        range 1 10
+        default 2
+
+endmenu

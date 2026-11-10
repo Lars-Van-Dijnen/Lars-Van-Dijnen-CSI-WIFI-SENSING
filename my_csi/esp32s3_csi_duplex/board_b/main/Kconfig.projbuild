@@ -1,0 +1,40 @@
+menu "CSI pair settings"
+
+    choice CSI_BOARD
+        prompt "Board identity"
+        default CSI_BOARD_A
+        help
+            Flash one board as A and the other as B. Both transmit and receive.
+
+        config CSI_BOARD_A
+            bool "Board A (starts request/reply cycles)"
+
+        config CSI_BOARD_B
+            bool "Board B (replies to A)"
+    endchoice
+
+    config CSI_CHANNEL
+        int "Wi-Fi channel (must match on both boards)"
+        range 1 11
+        default 6
+
+    config CSI_CYCLE_MS
+        int "Request/reply cycle period in milliseconds (Board A)"
+        range 20 5000
+        default 100
+        help
+            100 ms targets 10 packets per second in each direction.
+            Shorter periods may require a higher serial console baud rate.
+            This is a target period; scheduling and lost packets affect timing.
+
+    config CSI_REPLY_WAIT_MS
+        int "Application reply timeout in milliseconds (Board A)"
+        range 20 2000
+        default 80
+
+    config CSI_REPLY_DELAY_MS
+        int "Delay before replying in milliseconds (Board B)"
+        range 1 1000
+        default 5
+
+endmenu
